@@ -1,10 +1,10 @@
 package document
 
-type Document struct {
-	Id    string
-	Value string
-}
+type DocID string
 
-func (d *Document) Data() string {
-	return d.Value
+type Document struct {
+	Id    DocID
+	Index string
+
+	Value string
 }
