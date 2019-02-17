@@ -1,14 +1,16 @@
 package storage
 
 type Storage interface {
-	Get(k string) (string, error)
-	Set(k string, v string) error
+	Get(k string) ([]byte, error)
+	Add(k string, v []byte) error
 }
 
 func New(storageType string) Storage {
 	switch storageType {
-	case "local":
-		return NewLocalStorage()
+	case "fs":
+		return NewFSStorage()
+	case "mem":
+		return NewMemStorage()
 	default:
 		return nil
 	}

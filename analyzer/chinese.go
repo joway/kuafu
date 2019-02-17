@@ -1,23 +1,33 @@
 package analyzer
 
 import (
-	"github.com/go-ego/gse"
+	"fmt"
+	"github.com/joway/yaba"
 )
 
 type ChineseAnalyzer struct {
 	Analyzer
 
-	seg gse.Segmenter
+	seg yaba.Segmenter
 }
 
 func NewChineseAnalyzer() *ChineseAnalyzer {
 	a := &ChineseAnalyzer{}
-	if err := a.seg.LoadDict("./data/dict/cn.txt"); err != nil {
-		return nil
-	}
+	_ = a.seg.LoadStopWords("")
+	_ = a.seg.LoadDictionary("../data/dict/cn.txt")
 	return a
 }
 
-func (a *ChineseAnalyzer) Tokenize(input string) []string {
-	return a.seg.CutSearch(input)
+func (a *ChineseAnalyzer) Tokenize(input string) []*Token {
+	items := a.seg.Segment(input)
+	tokens := make([]*Token, 0)
+	for _, item := range items {
+		fmt.Println(item.Text)
+		token := NewToken(
+			item.Text,
+			[]uint{uint(item.Start)},
+		)
+		tokens = append(tokens, token)
+	}
+	return tokens
 }
