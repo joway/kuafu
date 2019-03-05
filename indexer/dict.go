@@ -4,7 +4,7 @@ import "github.com/joway/kuafu/document"
 
 type DictItem struct {
 	DocId document.DocID
-	TF  uint
+	TF    uint
 }
 
 type Dict struct {
