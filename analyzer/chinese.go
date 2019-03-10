@@ -1,31 +1,31 @@
 package analyzer
 
 import (
-	"fmt"
-	"github.com/joway/yaba"
+	"github.com/wangbin/jiebago"
 )
 
 type ChineseAnalyzer struct {
 	Analyzer
 
-	seg yaba.Segmenter
+	seg jiebago.Segmenter
 }
 
-func NewChineseAnalyzer() *ChineseAnalyzer {
+func NewChineseAnalyzer() Analyzer {
 	a := &ChineseAnalyzer{}
-	_ = a.seg.LoadStopWords("")
-	_ = a.seg.LoadDictionary("../data/dict/cn.txt")
+	if err := a.seg.LoadDictionary("./data/dict/cn.txt"); err != nil {
+		return nil
+	}
 	return a
 }
 
-func (a *ChineseAnalyzer) Tokenize(input string) []*Token {
-	items := a.seg.Segment(input)
-	tokens := make([]*Token, 0)
-	for _, item := range items {
-		fmt.Println(item.Text)
+func (a *ChineseAnalyzer) Tokenize(input []byte) []Token {
+	ch := a.seg.CutForSearch(string(input), true)
+
+	tokens := make([]Token, 0)
+	for word := range ch {
 		token := NewToken(
-			item.Text,
-			[]uint{uint(item.Start)},
+			word,
+			[]uint{0},
 		)
 		tokens = append(tokens, token)
 	}

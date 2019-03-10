@@ -11,4 +11,9 @@ func TestChineseAnalyzer_Tokenize(t *testing.T) {
 	for _, token := range tokens {
 		fmt.Println(token.Value)
 	}
+
+	tokens = a.Tokenize("Hi, how are you?")
+	for _, token := range tokens {
+		fmt.Println(token.Value)
+	}
 }

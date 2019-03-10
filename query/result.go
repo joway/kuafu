@@ -6,8 +6,8 @@ type Result struct {
 	Documents []document.Document
 }
 
-func NewResult(documents []document.Document) *Result {
-	return &Result{
+func NewResult(documents []document.Document) Result {
+	return Result{
 		Documents: documents,
 	}
 }

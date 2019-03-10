@@ -4,7 +4,7 @@ type FSStorage struct {
 	Storage
 }
 
-func NewFSStorage() *FSStorage {
+func NewFSStorage() Storage {
 	return &FSStorage{}
 }
 
