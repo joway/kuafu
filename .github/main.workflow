@@ -1,1 +1,3 @@
-
+workflow "Pipeline" {
+  on = "push"
+}
