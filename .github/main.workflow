@@ -1,6 +1,6 @@
 workflow "Pipeline" {
   on = "push"
-  resolves = ["Docker Build", "Docker Tag", "Docker Push"]
+  resolves = ["Docker Push"]
 }
 
 action "Docker Build" {
