@@ -1,10 +1,17 @@
 package document
 
-type DocID string
+type DocId string
 
 type Document struct {
-	Id    DocID
-	Index string
+	IndexName string
+	Id        DocId
+	Data      []byte
+}
 
-	Value string
+func New(index string, id DocId, data []byte) Document {
+	return Document{
+		IndexName: index,
+		Id:        id,
+		Data:      data,
+	}
 }
