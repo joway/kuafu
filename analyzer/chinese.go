@@ -12,7 +12,7 @@ type ChineseAnalyzer struct {
 
 func NewChineseAnalyzer() Analyzer {
 	a := &ChineseAnalyzer{}
-	if err := a.seg.LoadDictionary("./data/dict/cn.txt"); err != nil {
+	if err := a.seg.LoadDictionary("../data/dict/cn.txt"); err != nil {
 		return nil
 	}
 	return a
